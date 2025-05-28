@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Game, Genre, Tag
 
 # Create your views here.
@@ -15,3 +15,8 @@ def Catalog(request):
 def Main(request):
     genre = Genre.objects.all()
     return render(request, 'GameStore/main.html', context={'genre':genre})
+
+
+def detail(request, num):
+    game = get_object_or_404(Game, pk=num)
+    return render(request, 'GameStore/detail.html', context={'game':game})

@@ -1,7 +1,7 @@
 {% extends 'GameStore/base.html' %}
 
 {% block head %}
-  <link href="static/GameStore/catalog/css.css" rel="stylesheet">
+
 {% endblock %}
 
 {% block content %}
@@ -52,9 +52,11 @@
       {% for g in game %}
         <div class="card mb-3 p-3 bg-light border-0 shadow-sm">
           <div class="d-flex align-items-center">
-            <img src="{{ g.image.url }}" class="me-3 rounded" style="width: 150px; height: 110px; object-fit: cover;" alt="{{ g.name }}">
+            <a href="{% url 'game_detail' g.id %}">
+            <img src="{{ g.image.url }}" class="me-3 rounded" style="width: 190px; height: 130px; object-fit: cover;" alt="{{ g.name }}">
+            </a>
             <div class="flex-grow-1">
-              <h5 class="mb-1">{{ g.name }}</h5>
+              <h5 class="mb-1"><a href="{% url 'game_detail' g.id %}" class="text-decoration-none text-dark">{{ g.name }}</a></h5>
               <p class="mb-1 text-muted small">{{ g.description|truncatewords:30 }}</p>
             </div>
             <div class="text-end">
