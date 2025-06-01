@@ -6,25 +6,28 @@ def login_view(request):
 
     if request.method == 'POST':
 
-        login = request.POST.get('login')
+        username = request.POST.get('username')
         password = request.POST.get('password')
-        user = authenticate(request, username = login, password = password)
+        user = authenticate(request, username = username, password = password)
 
         if user is not None:
             user_login(request, user)
-            return redirect('/')
+            return redirect('main')
+        return render(request, 'user/login.html', {'error': 'Неверный логин или пароль'})
 
 
     return render(request, 'user/login.html')
 
 
 def register_view(request):
+
     if request.method == 'POST':
+
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
             user_login(request, user)
-            return redirect('/')
+            return redirect('main')
     else:
         form = RegisterForm()
     return render(request, 'user/register.html', {'form': form})
