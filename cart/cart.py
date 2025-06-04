@@ -1,5 +1,4 @@
 from decimal import Decimal
-
 from django.conf import settings
 from GameStore.models import Game
 

@@ -6,7 +6,7 @@ from django.urls import reverse
 
 class Game(models.Model):
     name = models.CharField(max_length=50,unique=True, verbose_name='Название игры')
-    slug = models.SlugField(max_length=50)
+    slug = models.SlugField(max_length=50, unique=True)
     description = models.TextField(verbose_name="Описание")
     price = models.DecimalField( max_digits=6, decimal_places=2 ,verbose_name="цена")
     image = models.ImageField(upload_to='media/games/')

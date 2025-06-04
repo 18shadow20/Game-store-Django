@@ -1,0 +1,53 @@
+{% extends 'GameStore/base.html' %}
+{% load static %}
+
+{% block title %}Корзина{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Ваша корзина</h2>
+
+    {% if cart_items %}
+        <table class="table table-bordered align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Изображение</th>
+                    <th>Игра</th>
+                    <th>Цена</th>
+                    <th>Количество</th>
+                    <th>Сумма</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr>
+                    <td>
+                        <img src="{{ item.game.image.url }}" alt="{{ item.game.name }}" style="height: 60px; object-fit: cover;">
+                    </td>
+                    <td>{{ item.game.name }}</td>
+                    <td>{{ item.game.price }} BYN</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.total_price }} BYN</td>
+                    <td>
+                        <form method="post" action="{% url 'remove_from_cart' item.game.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Удалить</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="text-end">
+            <h4>Итого: <strong>{{ cart_total }} BYN</strong></h4>
+            <a href="{% url 'checkout' %}" class="btn btn-success">Оформить заказ</a>
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            Ваша корзина пуста.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

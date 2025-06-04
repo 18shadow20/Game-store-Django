@@ -17,6 +17,6 @@ def Main(request):
     return render(request, 'GameStore/main.html', context={'genre':genre})
 
 
-def detail(request, num):
-    game = get_object_or_404(Game, pk=num)
+def detail(request, slug):
+    game = get_object_or_404(Game, slug__iexact = slug)
     return render(request, 'GameStore/detail.html', context={'game':game})
