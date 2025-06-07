@@ -1,10 +1,12 @@
 from django.db import models
 from GameStore.models import Game
-from user.models import User
+from django.contrib.auth import get_user_model
+
+user = get_user_model()
 
 
 class Order(models.Model):
-    user = models.ForeignKey(to=User, on_delete=models.SET_DEFAULT, blank=True, null=True, default=None)
+    user = models.ForeignKey(to=user, on_delete=models.SET_DEFAULT, blank=True, null=True, default=None)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField()

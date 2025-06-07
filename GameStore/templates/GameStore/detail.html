@@ -14,7 +14,12 @@
       <div class="mt-4 d-flex align-items-center justify-content-between">
         <span class="h4 text-success">{{ game.price }} BYN</span>
         {% if game.is_available %}
-          <a href="#" class="btn btn-dark btn-lg">Добавить в корзину</a>
+          <form action="{% url 'cart_add' game.id %}" method="post" class="d-inline">
+              {% csrf_token %}
+              <input type="hidden" name="quantity" value="1">
+              <input type="hidden" name="update" value="false">
+              <button type="submit" class="btn btn-outline-dark btn-sm">🛒 Добавить</button>
+          </form>
         {% else %}
           <span class="text-danger fw-semibold">Нет в наличии</span>
         {% endif %}
