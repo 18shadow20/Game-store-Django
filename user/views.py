@@ -1,9 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as user_login, logout as user_logout
 from .forms import RegisterForm
+from orders.models import Order
 
 def login_view(request):
-
     if request.method == 'POST':
 
         username = request.POST.get('username')
@@ -12,7 +13,7 @@ def login_view(request):
 
         if user is not None:
             user_login(request, user)
-            return redirect('main')
+            return redirect('profile_views')
         return render(request, 'user/login.html', {'error': 'Неверный логин или пароль'})
 
 
@@ -20,7 +21,6 @@ def login_view(request):
 
 
 def register_view(request):
-
     if request.method == 'POST':
 
         form = RegisterForm(request.POST)
@@ -31,3 +31,8 @@ def register_view(request):
     else:
         form = RegisterForm()
     return render(request, 'user/register.html', {'form': form})
+
+
+@login_required
+def profile_views(request):
+    return render(request, 'user/profile.html', {'user':request.user})

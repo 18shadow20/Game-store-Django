@@ -1,0 +1,45 @@
+{% extends 'GameStore/base.html' %}
+{% load static %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Личный кабинет</h2>
+
+    <div class="card mb-4">
+        <div class="card-header">Информация о пользователе</div>
+        <div class="card-body">
+            <p><strong>Имя пользователя:</strong> {{ request.user.username }}</p>
+            <p><strong>Email:</strong> {{ request.user.email }}</p>
+            <p><strong>Имя:</strong> {{ request.user.first_name }}</p>
+            <p><strong>Фамилия:</strong> {{ request.user.last_name }}</p>
+            <form method="post" action="{% url 'logout_view' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-outline-danger">Выйти</button>
+            </form>
+
+        </div>
+    </div>
+
+<!--    <div class="card">-->
+<!--        <div class="card-header">Ваши заказы</div>-->
+<!--        <div class="card-body">-->
+<!--            {% if orders %}-->
+<!--                <ul class="list-group">-->
+<!--                    {% for order in orders %}-->
+<!--                        <li class="list-group-item">-->
+<!--                            <strong>Заказ №{{ order.id }}</strong> от {{ order.created|date:"d.m.Y" }}<br>-->
+<!--                            Статус: {{ order.get_status_display }}<br>-->
+<!--                            Сумма: {{ order.total_price }} BYN-->
+<!--                            <a href="{% url 'order_detail' order.id %}" class="btn btn-sm btn-link">Подробнее</a>-->
+<!--                        </li>-->
+<!--                    {% endfor %}-->
+<!--                </ul>-->
+<!--            {% else %}-->
+<!--                <p>Вы ещё не сделали ни одного заказа.</p>-->
+<!--            {% endif %}-->
+<!--        </div>-->
+<!--    </div>-->
+</div>
+{% endblock %}
