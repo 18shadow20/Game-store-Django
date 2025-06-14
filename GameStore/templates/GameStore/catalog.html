@@ -13,8 +13,8 @@
         <div class="mb-4">
           <label class="form-label fw-semibold">Цена (BYN)</label>
           <div class="d-flex gap-2 align-items-center">
-            <input type="number" name="price_min" class="form-control" placeholder="От">
-            <input type="number" name="price_max" class="form-control" placeholder="До">
+            <input type="number" name="price_min" value="{{ price_min }}" class="form-control" placeholder="От">
+            <input type="number" name="price_max" value="{{ price_max }}" class="form-control" placeholder="До">
           </div>
         </div>
 
@@ -24,10 +24,13 @@
           {% for g in genre %}
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="genre" value="{{ g.id }}">
+                {% if g.id in genre_filt %}{% endif %}
               <label class="form-check-label">{{ g.name }}</label>
             </div>
           {% endfor %}
         </div>
+
+
 
         <!-- Метки -->
         <div class="mb-4">
@@ -35,6 +38,7 @@
           {% for t in tag %}
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="tag" value="{{ t.id }}">
+                {% if t.id in tag_filt %}{% endif %}
               <label class="form-check-label">{{ t.name }}</label>
             </div>
           {% endfor %}

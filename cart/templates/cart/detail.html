@@ -42,7 +42,7 @@
 
         <div class="text-end">
             <h4>Итого: <strong>{{ cart_total }} BYN</strong></h4>
-            <a href="{% url 'cart_detail' %}" class="btn btn-success">Оформить заказ</a>
+            <a href="{% url 'order_create' %}" class="btn btn-success">Оформить заказ</a>
         </div>
     {% else %}
         <div class="alert alert-info">
