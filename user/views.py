@@ -1,8 +1,14 @@
 from django.contrib.auth.decorators import login_required
+from django import forms
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login as user_login, logout as user_logout
+from django.contrib.auth import authenticate, login as user_login, get_user_model
+from django.contrib import messages
+
 from .forms import RegisterForm
 from orders.models import Order
+from django.contrib.auth.models import User
+
+User = get_user_model()
 
 def login_view(request):
     if request.method == 'POST':
@@ -35,4 +41,29 @@ def register_view(request):
 
 @login_required
 def profile_views(request):
-    return render(request, 'user/profile.html', {'user':request.user})
+    editing = request.GET.get('edit') == 'true'
+
+    class CustomProfileForm(forms.ModelForm):
+        class Meta:
+            model = User
+            fields = ['first_name', 'last_name', 'email', 'username']
+            labels = {
+                'username': 'Имя пользователя',
+                'email': 'Email',
+                'first_name': 'Имя',
+                'last_name': 'Фамилия',
+            }
+
+    if request.method == 'POST':
+        form = CustomProfileForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Профиль изменен')
+            return redirect('profile_views')
+    else:
+        form = CustomProfileForm(instance=request.user)
+    return render(request, 'user/profile.html', {'user':request.user,
+                                                                     'form':form,
+                                                                     'editing':editing},
+                                                                     )

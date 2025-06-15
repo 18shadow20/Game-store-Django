@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{% static 'GameStore/css/css.css' %}">
     {% block head %} {% endblock %}
 </head>
-<body class="bg-light">
+<body class="bg-light d-flex flex-column min-vh-100">
         <!-- Шапка и нижняя панель -->
     <header class="bg-dark text-white pb-0">
         <div class="container">
@@ -34,9 +34,13 @@
             </ul>
 
             <div class="d-flex gap-2">
-                <a href="#" class="btn btn-outline-light btn-sm">Поддержка</a>
-                <a href="{% url 'login_view' %}" class="btn btn-outline-light btn-sm">Вход/Регистрация</a>
-                </div>
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'profile_views' %}" class="btn btn-outline-light btn-sm">Личный кабинет</a>
+                {% else %}
+                    <a href="{% url 'login_view' %}" class="btn btn-outline-light btn-sm">Вход/Регистрация</a>
+                {% endif %}
+                    <a href="#" class="btn btn-outline-light btn-sm">Поддержка</a>
+            </div>
 
             </div>
         </div>
@@ -82,7 +86,7 @@
 {% endif %}
 
 
-    <main class="container">
+    <main class="container flex-grow-1">
         {% block content %}{% endblock %}
     </main>
 
