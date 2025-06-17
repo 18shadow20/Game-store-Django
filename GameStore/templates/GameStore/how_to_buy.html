@@ -1,0 +1,64 @@
+{% extends 'GameStore/base.html' %}
+{% load static %}
+
+{% block title %}Как купить игру{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4 text-center">Как купить игру?</h2>
+
+  <div class="row g-4">
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body text-center">
+          <div class="mb-3 fs-1">🛒</div>
+          <h5 class="card-title">1. Выберите игру</h5>
+          <p class="card-text">Перейдите в каталог, выберите понравившуюся игру и нажмите «Добавить в корзину».</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body text-center">
+          <div class="mb-3 fs-1">👤</div>
+          <h5 class="card-title">2. Зарегистрируйтесь или войдите</h5>
+          <p class="card-text">Создайте аккаунт или авторизуйтесь, чтобы оформить заказ и получить доступ к покупкам.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body text-center">
+          <div class="mb-3 fs-1">💳</div>
+          <h5 class="card-title">3. Оплатите заказ</h5>
+          <p class="card-text">Выберите удобный способ оплаты: банковская карта, электронные кошельки и другие.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body text-center">
+          <div class="mb-3 fs-1">📧</div>
+          <h5 class="card-title">4. Получите ключ на email</h5>
+          <p class="card-text">Сразу после оплаты ключ будет отправлен на вашу электронную почту и будет доступен в профиле.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body text-center">
+          <div class="mb-3 fs-1">🎮</div>
+          <h5 class="card-title">5. Активируйте игру</h5>
+          <p class="card-text">Используйте полученный ключ в Steam, Epic Games, Uplay или другой платформе, указанной на странице товара.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

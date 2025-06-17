@@ -1,0 +1,69 @@
+{% extends 'GameStore/base.html' %}
+{% load static %}
+
+{% block title %}Гарантии{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="text-center mb-5">Гарантии</h2>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4 text-center">
+
+        <div class="col">
+            <div class="p-3 rounded h-100">
+                <i class="bi bi-key fs-2 text-danger"></i>
+                <h5 class="mt-2 text-danger">Официальные ключи</h5>
+                <p class="text-muted">все ключи закупаются у официальных дилеров</p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="p-3 rounded h-100">
+                <i class="bi bi-book fs-2 text-success"></i>
+                <h5 class="mt-2 text-success">Отзывы к заказам</h5>
+                <p class="text-muted">Реальные отзывов от покупателей</p>
+            </div>
+        </div>
+
+
+        <div class="col">
+            <div class="p-3 rounded h-100">
+                <i class="bi bi-headset fs-2 text-danger"></i>
+                <h5 class="mt-2 text-danger">Поддержка</h5>
+                <p class="text-muted">помощь по играм, покупкам и требованиям</p>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="p-3 rounded h-100">
+                <i class="bi bi-rocket fs-2 text-purple"></i>
+                <h5 class="mt-2 text-purple">Моментальная доставка</h5>
+                <p class="text-muted">получите товар сразу после оплаты</p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="p-3 rounded h-100">
+                <i class="bi bi-shield-lock fs-2 text-secondary"></i>
+                <h5 class="mt-2 text-secondary">SSL-сертификат</h5>
+                <p class="text-muted">шифрование данных по современным стандартам</p>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="p-3 rounded h-100">
+                <i class="bi bi-megaphone fs-2 text-purple"></i>
+                <h5 class="mt-2 text-purple">Реклама</h5>
+                <p class="text-muted">нас рекламируют крупные каналы</p>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="p-3 rounded h-100">
+                <i class="bi bi-award fs-2 text-warning"></i>
+                <h5 class="mt-2 text-warning">Аттестат продавца</h5>
+                <p class="text-muted">официальный статус в системе Webmoney</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

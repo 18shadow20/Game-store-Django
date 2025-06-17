@@ -1,5 +1,9 @@
 from django.db import models
+from django.db.models import SET_DEFAULT, SET_NULL
 from django.urls import reverse
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 # Create your models here.
@@ -33,3 +37,10 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Comment(models.Model):
+    user = models.ForeignKey(to=User, blank=True, on_delete=SET_NULL, null=True)
+    game = models.ForeignKey(to=Game, on_delete=SET_NULL, null=True, blank=True)
+    text = models.TextField(verbose_name='Отзыв')
+    created_at = models.DateTimeField(auto_now_add=True)

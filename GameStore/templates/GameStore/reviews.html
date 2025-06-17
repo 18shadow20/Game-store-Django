@@ -1,0 +1,40 @@
+{% extends 'GameStore/base.html' %}
+
+{% block title %}Отзывы{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Отзывы пользователей</h2>
+
+    {% if comments %}
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            {% for comment in comments %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <a href="{% url 'game_detail' comment.game.slug %}">
+                                <img src="{{ comment.game.image.url }}" class="img-fluid rounded-start"
+                                     alt="{{ comment.game.name }}" style="height: 100%; object-fit: cover;">
+                                </a>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <a href="{% url 'game_detail' comment.game.slug %}" class="text-decoration-none text-dark">
+                                    <h5 class="card-title mb-1 ">{{ comment.game.name }}</h5>
+                                    </a>
+                                    <p class="card-subtitle text-muted mb-2">{{ comment.created_at|date:"d.m.Y H:i" }}
+                                        | <strong>{{ comment.user.username }}</strong></p>
+                                    <p class="card-text">{{ comment.text }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-muted text-center mt-5">Комментариев пока нет.</p>
+    {% endif %}
+</div>
+{% endblock %}

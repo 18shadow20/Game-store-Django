@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Game, Genre, Tag
+from .models import Game, Genre, Tag, Comment
 
 # Register your models here.
 
@@ -19,3 +19,8 @@ class GenreAdmin(admin.ModelAdmin):
 class TagAdmin(admin.ModelAdmin):
     list_display = ('name',)
     search_fields = ('name',)
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('user','game','text', 'created_at')

@@ -46,7 +46,7 @@ def profile_views(request):
     class CustomProfileForm(forms.ModelForm):
         class Meta:
             model = User
-            fields = ['first_name', 'last_name', 'email', 'username']
+            fields = ['username','email', 'first_name', 'last_name',]
             labels = {
                 'username': 'Имя пользователя',
                 'email': 'Email',

@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Game, Genre, Tag
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Game, Genre, Tag, Comment
 from django.core.paginator import Paginator
 from django.db.models import Q
+from .forms import CommentForm
 
 # Create your views here.
 def Catalog(request):
@@ -56,5 +57,33 @@ def Main(request):
 
 def detail(request, slug):
     game = get_object_or_404(Game, slug__iexact = slug)
-    return render(request, 'GameStore/detail.html', context={'game':game})
+    comments = game.comment_set.all().order_by('-created_at')
 
+    if request.method == "POST":
+        if request.user.is_authenticated:
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                comment = form.save(commit=False)
+                comment.user = request.user
+                comment.game = game
+                comment.save()
+                return redirect('game_detail', slug=slug)
+        else:
+            return redirect('login_view')
+    else:
+        form = CommentForm()
+
+    return render(request, 'GameStore/detail.html', context={'game':game,
+                                                                          'form':form,
+                                                                          'comments':comments})
+
+def reviews(request):
+    comments = Comment.objects.all()
+    return render(request, 'GameStore/reviews.html', {'comments':comments})
+
+
+def guarantees(request):
+    return render(request, 'GameStore/guarantees.html')
+
+def how_to_buy(request):
+    return render(request, 'GameStore/how_to_buy.html')
