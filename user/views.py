@@ -3,7 +3,6 @@ from django import forms
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as user_login, get_user_model
 from django.contrib import messages
-
 from .forms import RegisterForm
 from orders.models import Order
 from django.contrib.auth.models import User

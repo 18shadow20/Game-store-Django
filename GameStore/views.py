@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from unicodedata import category
+
 from .models import Game, Genre, Tag, Comment
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -51,8 +53,12 @@ def Catalog(request):
     })
 
 def Main(request):
-    genre = Genre.objects.all()
-    return render(request, 'GameStore/main.html', context={'genre':genre})
+    recommended = Game.objects.filter(main_categories__name='Рекомендуемые')[:15]
+    new = Game.objects.filter(main_categories__name='Новинки')[:15]
+    bestsellers  = Game.objects.filter(main_categories__name='Лидеры продаж')[:15]
+    return render(request, 'GameStore/main.html',{"recommended":recommended,
+                                                                      "new":new,
+                                                                      "bestsellers":bestsellers,})
 
 
 def detail(request, slug):

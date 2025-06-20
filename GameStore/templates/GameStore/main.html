@@ -1,5 +1,128 @@
 {% extends 'GameStore/base.html' %}
 
-{% block content %}
+{% block head %}
+<style>
+.nav-underline .nav-link.active {
+    border-bottom: 2px solid gray;
+}
+</style>
+{% endblock %}
 
+{% block content %}
+<div class="container my-4">
+
+    <!-- Кнопки переключения категорий -->
+    <div class="d-flex justify-content-center align-items-center py-3">
+        <ul class="nav nav-underline justify-content-center">
+            <li class="nav-item">
+                <a href="#" class="nav-link text-dark" onclick="showCategory(event, 'recommended')">Рекомендуемые</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link text-dark" onclick="showCategory(event, 'new')">Новинки</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link text-dark" onclick="showCategory(event, 'bestsellers')">Лидеры продаж</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Контейнеры категорий -->
+    <div id="recommended" class="category-section">
+        <div class="row row-cols-5 g-3">
+            {% for game in recommended %}
+                <div class="col text-center">
+                    <a class="text-decoration-none text-dark" href="{% url 'game_detail' game.slug %}" >
+                        <img src="{{ game.image.url }}" alt="{{ game.name }}" class="img-thumbnail" />
+                    </a>
+                    <div class="text-dark fw-bold mb-2">{{ game.price }} BYN</div>
+                    <div class="fw-bold mb-2">
+                        <a class="text-decoration-none text-dark" href="{% url 'game_detail' game.slug %}">
+                        {{ game.name }}
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id="new" class="category-section" style="display:none;">
+        <div class="row row-cols-5 g-3">
+            {% for game in new %}
+                <div class="col text-center">
+                    <a class="text-decoration-none text-dark" href="{% url 'game_detail' game.slug %}" >
+                        <img src="{{ game.image.url }}" alt="{{ game.name }}" class="img-thumbnail" />
+                    </a>
+                    <div class="text-dark fw-bold mb-2">{{ game.price }} BYN</div>
+                    <div class="fw-bold mb-2">
+                        <a class="text-decoration-none text-dark" href="{% url 'game_detail' game.slug %}">
+                        {{ game.name }}
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id="bestsellers" class="category-section" style="display:none;">
+        <div class="row row-cols-5 g-3">
+            {% for game in bestsellers %}
+                <div class="col text-center">
+                    <a class="text-decoration-none text-dark" href="{% url 'game_detail' game.slug %}" >
+                        <img src="{{ game.image.url }}" alt="{{ game.name }}" class="img-thumbnail" />
+                    </a>
+                    <div class="text-dark fw-bold mb-2">{{ game.price }} BYN</div>
+                    <div class="fw-bold mb-2">
+                        <a class="text-decoration-none text-dark" href="{% url 'game_detail' game.slug %}">
+                        {{ game.name }}
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="bg-warning text-light container py-5">
+      <div class="row text-center">
+        <div class="col-md-3 mb-4">
+          <h2 class="fw-bold display-5 text-dark">10</h2>
+          <p class="text-uppercase small text-dark">Лет продаем игры</p>
+        </div>
+        <div class="col-md-3 mb-4">
+          <h2 class="fw-bold display-5 text-dark">3.100.000+</h2>
+          <p class="text-uppercase small text-dark">Ключей выдали</p>
+        </div>
+        <div class="col-md-3 mb-4">
+          <h2 class="fw-bold display-5 text-dark">100.000+</h2>
+          <p class="text-uppercase small text-dark">Настоящих отзывов</p>
+        </div>
+        <div class="col-md-3 mb-4">
+          <h2 class="fw-bold display-5 text-dark">10.000+</h2>
+          <p class="text-uppercase small text-dark">Игр в наличии</p>
+        </div>
+      </div>
+    </div>
+
+</div>
+
+<script>
+function showCategory(event, categoryId) {
+    event.preventDefault(); // чтобы не прокручивалась страница
+
+    // Скрыть все категории
+    document.querySelectorAll('.category-section').forEach(section => {
+        section.style.display = 'none';
+    });
+
+    // Показать выбранную категорию
+    document.getElementById(categoryId).style.display = 'block';
+
+    // Сброс активного класса
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+    });
+
+    // Добавить активный класс текущей ссылке
+    event.target.classList.add('active');
+}
+</script>
 {% endblock %}

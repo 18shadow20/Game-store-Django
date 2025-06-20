@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'user',
     'cart',
     'orders',
+    'payment',
 ]
 
 MIDDLEWARE = [
@@ -150,3 +151,8 @@ LOGOUT_REDIRECT_URL = 'login_view'
 CART_SESSION_ID = 'cart'
 
 AUTH_USER_MODEL = 'user.User'
+
+
+STRIPE_SECRET_KEY='sk_test_51RbkCXPJlvLXTpFn77bY0LZFOZ1dTn0Q7w76pkbV0eXYi3WHZrpFk2HoMs3bv3EiRAHuAA2xm6VrsmyEYuHoBrG100VkW85QuS'
+STRIPE_PUBLISHABLE_KEY='pk_test_51RbkCXPJlvLXTpFnLHQFrcnGaaJhCUBDRLMVslU89gLoZVlergfSB4sLuiiXiijQqKWJ37AO1RnnGt5sMfLjWqxO00G43ssJaK'
+STRIPE_API_VERSION = '2025-05-28.basil'

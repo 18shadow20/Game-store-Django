@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import SET_DEFAULT, SET_NULL
+from django.db.models import SET_NULL
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 
@@ -18,6 +18,7 @@ class Game(models.Model):
     tag = models.ManyToManyField('Tag',blank=True)
     is_available = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
+    main_categories = models.ManyToManyField('MainCategories', blank=True)
 
     def get_absolute_url(self):
         return reverse('GameStore/game_detail',
@@ -38,9 +39,24 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+class MainCategories(models.Model):
+    name = models.CharField(max_length=30, unique=True)
+
+    def __str__(self):
+        return self.name
+
+class GameKey(models.Model):
+    game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='key')
+    key = models.CharField(max_length=100, unique=True)
+    is_used = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.game.name} - {'использован' if self.is_used else 'доступен'}'
+
 
 class Comment(models.Model):
     user = models.ForeignKey(to=User, blank=True, on_delete=SET_NULL, null=True)
     game = models.ForeignKey(to=Game, on_delete=SET_NULL, null=True, blank=True)
     text = models.TextField(verbose_name='Отзыв')
     created_at = models.DateTimeField(auto_now_add=True)
+

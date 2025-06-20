@@ -16,31 +16,31 @@
         <!-- Верхняя панель -->
             <div class="d-flex justify-content-between align-items-center py-3">
 
-            <h1 class="m-0">
-                <a href="/" class="text-white text-decoration-none">
-                <img src="{% static 'GameStore/img/unnamed.png' %}" style="height: 40px">
-                Game Store</a>
-            </h1>
+                <h1 class="m-0">
+                    <a href="/" class="text-white text-decoration-none">
+                    <img src="{% static 'GameStore/img/unnamed.png' %}" style="height: 40px">
+                    Game Store</a>
+                </h1>
 
-            <ul class="nav nav-underline">
-                <li class="nav-item">
-                <a class="nav-link text-white" href="{% url 'reviews' %}">Отзывы</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link text-white" href="{% url 'guarantees' %}">Гарантии</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link text-white" href="{% url 'how_to_buy' %}">Как купить</a>
-                </li>
-            </ul>
+                <ul class="nav nav-underline">
+                    <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'reviews' %}">Отзывы</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'guarantees' %}">Гарантии</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'how_to_buy' %}">Как купить</a>
+                    </li>
+                </ul>
 
-            <div class="d-flex gap-2">
-                {% if request.user.is_authenticated %}
-                    <a href="{% url 'profile_views' %}" class="btn btn-outline-light btn-sm">Личный кабинет</a>
-                {% else %}
-                    <a href="{% url 'login_view' %}" class="btn btn-outline-light btn-sm">Вход/Регистрация</a>
-                {% endif %}
-            </div>
+                <div class="d-flex gap-2">
+                    {% if request.user.is_authenticated %}
+                        <a href="{% url 'profile_views' %}" class="btn btn-outline-light btn-sm">Личный кабинет</a>
+                    {% else %}
+                        <a href="{% url 'login_view' %}" class="btn btn-outline-light btn-sm">Вход/Регистрация</a>
+                    {% endif %}
+                </div>
 
             </div>
         </div>
@@ -92,10 +92,44 @@
         {% block content %}{% endblock %}
     </main>
 
+
 <footer class="bg-dark text-white py-3 mt-5">
-    <div class="container text-center">
-        <p>&copy; {{ year|default:2025 }} Game Store</p>
+      <div class="container">
+    <div class="row">
+
+      <div class="col-md-4 mb-3">
+        <h5 class="text-uppercase">Магазин игр</h5>
+        <ul class="list-unstyled">
+          <li><a href="{% url 'main' %}" class="text-white text-decoration-none small">Главная</a></li>
+          <li><a href="{% url 'catalog' %}" class="text-white text-decoration-none small">Каталог игр</a></li>
+          <li><a href="{% url 'how_to_buy' %}" class="text-white text-decoration-none small">Как купить</a></li>
+          <li><a href="{% url 'reviews' %}" class="text-white text-decoration-none small">Отзывы</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <h5 class="text-uppercase">Информация</h5>
+        <p class="small">
+            Сайт работает для всех стран, включая СНГ и Россию. Некоторые товары имеют региональные
+            ограничения, которые указаны в описании товара или при оформлении заказа - будьте внимательны!
+            <br>
+            Все продаваемые ключи закупаются у официальных дилеров, которые работают напрямую с издателями
+        </p>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <h5 class="text-uppercase">Контакты</h5>
+        <p class="mb-0 small">Email: support@gamestore.by</p>
+        <p class="mb-0 small">Телефон: +375 (00) 000-00-00</p>
+        <p class="mb-0 small">Время работы: 10:00–22:00</p>
+
+      </div>
+
     </div>
+
+    <hr class="border-secondary mt-4">
+    <p class="text-center mb-0">&copy; 2025 GameStore. Все права защищены.</p>
+  </div>
 </footer>
 
 
