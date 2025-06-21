@@ -31,7 +31,6 @@
         </div>
 
 
-
         <!-- Метки -->
         <div class="mb-4">
           <label class="form-label fw-semibold">Метки</label>
@@ -57,16 +56,18 @@
             <a href="{% url 'game_detail' g.slug %}">
             <img src="{{ g.image.url }}" class="me-3 rounded" style="width: 190px; height: 130px; object-fit: cover;" alt="{{ g.name }}">
             </a>
+
             <div class="flex-grow-1">
               <h5 class="mb-1"><a href="{% url 'game_detail' g.slug %}" class="text-decoration-none text-dark">{{ g.name }}</a></h5>
               <p class="mb-1 text-muted small">{{ g.description|truncatewords:30 }}</p>
             </div>
+
             <div class="text-end">
               <div class="text-success fw-bold mb-2">{{ g.price }} BYN</div>
               <form action="{% url 'cart_add' g.id %}" method="post" class="d-inline">
                 {% csrf_token %}
                 <input type="hidden" name="quantity" value="1">
-                <input type="hidden" name="update" value="false">
+                <input type="hidden" name="update" value="False">
                 <button type="submit" class="btn btn-outline-dark btn-sm">🛒 Добавить</button>
               </form>
             </div>
@@ -110,7 +111,6 @@
           </ul>
       </nav>
     {% endif %}
-
 
     </div>
   </div>

@@ -1,5 +1,7 @@
 {% extends 'GameStore/base.html' %}
 
+{% block title %} {{ game.name }} {% endblock %}
+
 {% block content %}
 <div class="container py-4">
   <div class="row">
@@ -9,7 +11,7 @@
     <div class="col-md-7">
       <h1 class="fw-bold">{{ game.name }}</h1>
       <p class="text-muted">{{ game.genre.all|join:", " }}</p>
-      <p class="mt-3">{{ game.description }}</p>
+      <p class="mt-3">{{ game.description|truncatewords:40 }}</p>
 
       <div class="mt-4 d-flex align-items-center justify-content-between">
         <span class="h4 text-success">{{ game.price }} BYN</span>
@@ -37,6 +39,23 @@
 
     <div class="container mt-5">
       <h3 class="mb-4">Отзывы</h3>
+
+      <!-- фото игры -->
+      <div class="game-gallery row row-cols-2 row-cols-md-3 g-2 mt-4">
+          {% if game.game_gallery.all %}
+              {% for img in game.game_gallery.all %}
+                  <div class="col">
+                      <img src="{{ img.image.url }}" class="img-fluid rounded shadow-sm" alt="Скриншот">
+                  </div>
+              {% endfor %}
+          {% else %}
+              <div class="col">
+                  <img src="{{ game.image.url }}" class="img-fluid rounded shadow-sm" alt="{{ game.name }}">
+              </div>
+          {% endif %}
+      </div>
+
+
 
       <!-- Вывод всех комментариев -->
       {% if game.comment_set.all %}

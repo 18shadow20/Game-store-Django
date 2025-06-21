@@ -19,6 +19,9 @@ class Game(models.Model):
     is_available = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     main_categories = models.ManyToManyField('MainCategories', blank=True)
+    release_date = models.DateField(verbose_name='Дата издания',blank=True)
+    publisher = models.CharField(max_length=50, verbose_name='Издатель',blank=True)
+
 
     def get_absolute_url(self):
         return reverse('GameStore/game_detail',
@@ -26,6 +29,10 @@ class Game(models.Model):
 
     def __str__(self):
         return self.name
+
+class GameImage(models.Model):
+    game = models.ForeignKey(Game, related_name='game_gallery', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='media/game_gallery/')
 
 class Genre(models.Model):
     name = models.CharField(max_length=50, unique=True)
