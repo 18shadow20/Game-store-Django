@@ -5,6 +5,7 @@ from django.views.decorators.http import require_POST
 from .forms import CartAddGameForm
 
 
+
 @require_POST
 def cart_add(request, game_id):
     cart = Cart(request)

@@ -1,7 +1,11 @@
 from django.contrib import admin
-from .models import Game, Genre, Tag, Comment, MainCategories, GameKey
+from .models import Game, Genre, Tag, Comment, MainCategories, GameKey, GameImage
 
 # Register your models here.
+
+class GameImageInline(admin.TabularInline):
+    model = GameImage
+    extra = 1
 
 @admin.register(Game)
 class GameAdmin(admin.ModelAdmin):
@@ -9,6 +13,7 @@ class GameAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     list_filter = ('is_available', 'genre','tag')
     prepopulated_fields = {'slug':('name',)}
+    inlines = [GameImageInline]
 
 @admin.register(Genre)
 class GenreAdmin(admin.ModelAdmin):
@@ -34,3 +39,5 @@ class MainCategoriestAdmin(admin.ModelAdmin):
 @admin.register(GameKey)
 class GameKeyAdmin(admin.ModelAdmin):
     list_display = ('game','key', 'is_used')
+
+
