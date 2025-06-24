@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 
-from django.conf.global_settings import LOGIN_URL, LOGIN_REDIRECT_URL, LOGOUT_REDIRECT_URL, AUTH_USER_MODEL
+from django.conf.global_settings import LOGIN_URL, LOGIN_REDIRECT_URL, LOGOUT_REDIRECT_URL, AUTH_USER_MODEL, \
+    EMAIL_BACKEND
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -157,3 +158,6 @@ STRIPE_SECRET_KEY='sk_test_51RbkCXPJlvLXTpFn77bY0LZFOZ1dTn0Q7w76pkbV0eXYi3WHZrpF
 STRIPE_PUBLISHABLE_KEY='pk_test_51RbkCXPJlvLXTpFnLHQFrcnGaaJhCUBDRLMVslU89gLoZVlergfSB4sLuiiXiijQqKWJ37AO1RnnGt5sMfLjWqxO00G43ssJaK'
 STRIPE_API_VERSION = '2025-05-28.basil'
 STRIPE_WEBHOOK_SECRET = 'whsec_186eb7dc2e3b3fc810f17d1002ca68fb2b23ea4cea68223df4dbc3919afb5798'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'reply@gamestore.by'

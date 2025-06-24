@@ -20,6 +20,3 @@ def order_create(request):
         form = OrderCreateForm()
     return render(request, 'orders/order_create.html', {'cart':cart, 'form':form})
 
-
-def order_created(request, order_id):
-    return render(request, 'orders/order_created.html',{'order_id':order_id})

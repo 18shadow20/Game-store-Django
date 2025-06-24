@@ -63,14 +63,18 @@
             </div>
 
             <div class="text-end">
-              <div class="text-success fw-bold mb-2">{{ g.price }} BYN</div>
-              <form action="{% url 'cart_add' g.id %}" method="post" class="d-inline">
-                {% csrf_token %}
-                <input type="hidden" name="quantity" value="1">
-                <input type="hidden" name="update" value="False">
-                <button type="submit" class="btn btn-outline-dark btn-sm">🛒 Добавить</button>
-              </form>
-            </div>
+                <div class="text-success fw-bold mb-2">{{ g.price }} BYN</div>
+                {% if g.is_available %}
+                  <form action="{% url 'cart_add' g.id %}" method="post" class="d-inline">
+                    {% csrf_token %}
+                    <input type="hidden" name="quantity" value="1">
+                    <input type="hidden" name="update" value="False">
+                    <button type="submit" class="btn btn-outline-dark btn-sm">🛒 Добавить</button>
+                  </form>
+                {% else %}
+                    <span class="text-danger fw-semibold">Нет в наличии</span>
+                {% endif %}
+                </div>
           </div>
         </div>
       {% endfor %}

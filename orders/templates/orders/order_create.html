@@ -10,20 +10,14 @@
     <div class="row">
         <!-- Форма оформления -->
         <div class="col-md-7">
-            <form method="post" action="{% url 'order_create' %}">
-                {% csrf_token %}
-
-                <div class="card p-4 shadow-sm mb-4">
-                    <h5 class="mb-3">Данные покупателя</h5>
-
+                <form method="post" action="{% url 'order_create' %}">
+                    {% csrf_token %}
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control" required>
+                        <label for="id_email" class="form-label">Email</label>
+                        <input type="email" name="email" id="id_email" class="form-control" placeholder="example@mail.com" required>
                     </div>
-                </div>
-
-                <button type="submit" class="btn btn-dark w-100">Подтвердить заказ</button>
-            </form>
+                    <button type="submit" class="btn btn-dark w-100">Подтвердить заказ</button>
+                </form>
         </div>
 
         <!-- Корзина справа -->

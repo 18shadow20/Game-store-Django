@@ -6,7 +6,6 @@ from orders.models import Order
 from django.conf import settings
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
 from GameStore.models import GameKey
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -56,10 +55,6 @@ def payment_completed(request):
 def payment_canceled(request):
     return render(request, 'payment/canceled.html' )
 
-# def payment_start_view(request):
-#     order_id = request.session.get('order_id')
-#     order = get_object_or_404(Order, id=order_id)
-#     return render(request, 'GameStore/process.html', {'order': order})
 
 
 @csrf_exempt
@@ -80,29 +75,29 @@ def stripe_webhook(request):
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
         order_id = session.get('client_reference_id')
-        customer_email = session.get('customer_email')
+
 
         try:
             order = Order.objects.get(id=order_id)
             order.paid = True
             order.save()
 
-            # # выдать ключ каждому товару
-            # for item in order.items.all():
-            #     game = item.product
-            #     for _ in range(item.quantity):
-            #         key = GameKey.objects.filter(game=game, is_used=False).first()
-            #         if key:
-            #             key.is_used = True
-            #             key.save()
-            #
-            #             # отправка ключа
-            #             send_mail(
-            #                 subject='Ваш ключ игры',
-            #                 message=f'Спасибо за покупку {game.name}!\nВаш ключ: {key.key}',
-            #                 from_email=settings.DEFAULT_FROM_EMAIL,
-            #                 recipient_list=[customer_email],
-            #             )
+            # выдать ключ каждому товару
+            for item in order.items.all():
+                game = item.game
+                for _ in range(item.quantity):
+                    key = GameKey.objects.filter(game=game, is_used=False).first()
+                    if key:
+                        key.is_used = True
+                        key.save()
+
+                        # отправка ключа
+                        send_mail(
+                            subject='Ваш ключ игры',
+                            message=f'Спасибо за покупку {game.name}!\nВаш ключ: {key.key}',
+                            from_email=settings.DEFAULT_FROM_EMAIL,
+                            recipient_list=[order.email],
+                         )
         except Order.DoesNotExist:
             pass
 

@@ -4,7 +4,9 @@
 
 
 {% block content %}
-    <div class="text-center mt-5">
-        <h1>Оплата прошла</h1>
-    </div>
+   <div class="container py-5 text-center">
+        <h2 class="mb-4">Спасибо за заказ!</h2>
+        <p>Ваш заказ №{{ order_id }} успешно оформлен.</p>
+        <a href="{% url 'main' %}" class="btn btn-dark mt-3">На главную</a>
+   </div>
 {% endblock %}
