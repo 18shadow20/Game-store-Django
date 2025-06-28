@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-r!add$yh!k-cgp&#wcr%k9m8$(9xj+i)wa)=_56ocsio85e%b3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -152,15 +152,11 @@ CART_SESSION_ID = 'cart'
 AUTH_USER_MODEL = 'user.User'
 
 
-# STRIPE_SECRET_KEY= os.getenv('STRIPE_SECRET_KEY')
-# STRIPE_PUBLISHABLE_KEY=os.getenv('STRIPE_PUBLISHABLE_KEY')
-# STRIPE_API_VERSION = os.getenv('STRIPE_API_VERSION')
-# STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET')
+STRIPE_SECRET_KEY= os.getenv('STRIPE_SECRET_KEY')
+STRIPE_PUBLISHABLE_KEY=os.getenv('STRIPE_PUBLISHABLE_KEY')
+STRIPE_API_VERSION = os.getenv('STRIPE_API_VERSION')
+STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET')
 
-STRIPE_SECRET_KEY='sk_test_51RbkCXPJlvLXTpFn77bY0LZFOZ1dTn0Q7w76pkbV0eXYi3WHZrpFk2HoMs3bv3EiRAHuAA2xm6VrsmyEYuHoBrG100VkW85QuS'
-STRIPE_PUBLISHABLE_KEY='pk_test_51RbkCXPJlvLXTpFnLHQFrcnGaaJhCUBDRLMVslU89gLoZVlergfSB4sLuiiXiijQqKWJ37AO1RnnGt5sMfLjWqxO00G43ssJaK'
-STRIPE_API_VERSION = '2025-05-28.basil'
-STRIPE_WEBHOOK_SECRET = 'whsec_186eb7dc2e3b3fc810f17d1002ca68fb2b23ea4cea68223df4dbc3919afb5798'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'reply@gamestore.by'
