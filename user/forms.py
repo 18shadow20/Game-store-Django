@@ -22,3 +22,15 @@ class LoginForm(AuthenticationForm):
     password = forms.CharField(widget=forms.PasswordInput)
 
 
+class CustomProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username','email', 'first_name', 'last_name',]
+        labels = {
+            'username': 'Имя пользователя',
+            'email': 'Email',
+            'first_name': 'Имя',
+            'last_name': 'Фамилия',
+            }
+
+

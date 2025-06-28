@@ -61,8 +61,8 @@
               <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="{% url 'catalog' %}">Все игры</a></li>
                   <li><hr class="dropdown-divider"></li>
-                  {% for g in genre %}
-                      <li><a class="dropdown-item" href="{% url 'catalog' %}?genre={{ g.id }}">{{g.name}} </a></li>
+                  {% for genre in genres %}
+                      <li><a class="dropdown-item" href="{% url 'catalog' %}?genre={{ genre.id }}">{{genre.name}} </a></li>
                   {% endfor %}
               </ul>
             </div>

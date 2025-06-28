@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from unicodedata import category
+
 
 from .models import Game, Genre, Tag, Comment
 from django.core.paginator import Paginator
@@ -7,7 +7,7 @@ from django.db.models import Q
 from .forms import CommentForm
 
 # Create your views here.
-def Catalog(request):
+def catalog(request):
                 #фильтры
     name_filt = request.GET.get('name_filt')
     genre_filt = request.GET.getlist('genre')
@@ -18,7 +18,7 @@ def Catalog(request):
     game = Game.objects.all()
 
     if name_filt:
-        game = Game.objects.filter(Q(name__icontains = name_filt) | Q(description__icontains=name_filt))
+        game = game.filter(Q(name__icontains = name_filt) | Q(description__icontains=name_filt))
 
     if genre_filt:
         game = game.filter(genre__id__in = genre_filt).distinct()
@@ -52,7 +52,7 @@ def Catalog(request):
         'price_max':price_max,
     })
 
-def Main(request):
+def main(request):
     recommended = Game.objects.filter(main_categories__name='Рекомендуемые')[:15]
     new = Game.objects.filter(main_categories__name='Новинки')[:15]
     bestsellers  = Game.objects.filter(main_categories__name='Лидеры продаж')[:15]

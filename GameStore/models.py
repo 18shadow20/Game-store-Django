@@ -13,7 +13,7 @@ class Game(models.Model):
     slug = models.SlugField(max_length=50, unique=True)
     description = models.TextField(verbose_name="Описание")
     price = models.DecimalField( max_digits=6, decimal_places=2 ,verbose_name="цена")
-    image = models.ImageField(upload_to='media/games/')
+    image = models.ImageField(upload_to='games/')
     genre = models.ManyToManyField('Genre', )
     tag = models.ManyToManyField('Tag',blank=True)
     is_available = models.BooleanField(default=False)
@@ -32,7 +32,7 @@ class Game(models.Model):
 
 class GameImage(models.Model):
     game = models.ForeignKey(Game, related_name='game_gallery', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='media/game_gallery/')
+    image = models.ImageField(upload_to='game_gallery/')
 
 class Genre(models.Model):
     name = models.CharField(max_length=50, unique=True)
@@ -53,12 +53,12 @@ class MainCategories(models.Model):
         return self.name
 
 class GameKey(models.Model):
-    game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='key')
-    key = models.CharField(max_length=100, unique=True)
+    game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='keys')
+    keys = models.CharField(max_length=100, unique=True)
     is_used = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{self.game.name} - {'использован' if self.is_used else 'доступен'}'
+        return f"{self.game.name} - {'использован' if self.is_used else 'доступен'}"
 
 
 class Comment(models.Model):

@@ -6,9 +6,9 @@ user = get_user_model()
 
 
 class Order(models.Model):
-    user = models.ForeignKey(to=user, on_delete=models.SET_DEFAULT, blank=True, null=True, default=None)
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+    user = models.ForeignKey(to=user, on_delete=models.SET_NULL, blank=True, null=True, default=None)
+    first_name = models.CharField(max_length=50, blank=True)
+    last_name = models.CharField(max_length=50, blank=True)
     email = models.EmailField()
     created = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(auto_now=True)
@@ -21,7 +21,7 @@ class Order(models.Model):
         return f'Заказ: {self.id}'
 
     def get_total_cost(self):
-        return sum(item.get_cost() for i in self.items.all())
+        return sum(i.get_cost() for i in self.items.all())
 
 
 class OrderItem(models.Model):

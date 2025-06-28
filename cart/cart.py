@@ -18,7 +18,7 @@ class Cart:
             self.cart[game_id] = {'quantity':0,
                                   'price': str(game.price),
                                   'name':game.name,
-                                  'image':game.image.url}
+                                  'image':game.image.url if game.image else ""}
         if update_quantity:
             self.cart[game_id]['quantity'] = quantity
         else:

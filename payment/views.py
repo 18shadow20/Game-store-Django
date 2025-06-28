@@ -13,7 +13,7 @@ stripe.api_version = settings.STRIPE_API_VERSION
 
 
 @csrf_exempt
-def CreatePayment(request):
+def createPayment(request):
     order_id = request.session.get('order_id', None)
 
     order = get_object_or_404(Order, id=order_id)
@@ -30,10 +30,7 @@ def CreatePayment(request):
         'line_items':[],
     }
 
-    print("Заказ:", order)
-    print("Товары в заказе:", order.items.all())
     for item in order.items.all():
-        print("-", item.game.name, item.quantity, item.price)
         session_data['line_items'].append({
             'price_data':{
                 'currency':'byn',
@@ -70,7 +67,7 @@ def stripe_webhook(request):
             settings.STRIPE_WEBHOOK_SECRET
         )
     except stripe.error.SignatureVerificationError:
-        return HttpRequest(status=400)
+        return HttpResponse('Invalid signature')
 
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
@@ -99,7 +96,7 @@ def stripe_webhook(request):
                             recipient_list=[order.email],
                          )
         except Order.DoesNotExist:
-            pass
+            print("Заказ не найден в webhook")
 
     return HttpResponse(status=200)
 
