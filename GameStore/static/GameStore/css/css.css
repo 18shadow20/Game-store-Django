@@ -1,0 +1,8 @@
+.page-item.active .page-link,
+.page-item.active .page-link:focus,
+.page-item.active .page-link:active {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  background-color: #000 !important;
+}

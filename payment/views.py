@@ -57,13 +57,12 @@ def payment_canceled(request):
 @csrf_exempt
 def stripe_webhook(request):
     payload = request.body
-    sid_header = request.META.get('HTTP_STRIPE_SIGNATURE')
-    event = None
+    sig_header = request.META.get('HTTP_STRIPE_SIGNATURE')
 
     try:
         event = stripe.Webhook.construct_event(
             payload,
-            sid_header,
+            sig_header,
             settings.STRIPE_WEBHOOK_SECRET
         )
     except stripe.error.SignatureVerificationError:

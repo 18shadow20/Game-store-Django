@@ -54,7 +54,7 @@ class MainCategories(models.Model):
 
 class GameKey(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='keys')
-    keys = models.CharField(max_length=100, unique=True)
+    key = models.CharField(max_length=100, unique=True)
     is_used = models.BooleanField(default=False)
 
     def __str__(self):
