@@ -91,7 +91,7 @@ python manage.py runserver
 ```
 6. **Для обработки вебхуков Stripe (после оплаты) настрой URL:**
 ```ruby
-http://127.0.0.1:8000/payment/webhooks/
+http://127.0.0.1:8000/payment/webhook/
 ```
 
 

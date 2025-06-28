@@ -158,5 +158,6 @@ STRIPE_API_VERSION = os.getenv('STRIPE_API_VERSION')
 STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET')
 
 
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'reply@gamestore.by'
