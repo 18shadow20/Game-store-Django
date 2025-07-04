@@ -1,5 +1,5 @@
 from django.core.mail import send_mail
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 import stripe
 from orders.models import Order

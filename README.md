@@ -40,7 +40,7 @@
 ### Личный кабинет/Регистрация/Вход
 
 <img src="screenshots/profile.png" width="500"/> 
-<img src="screenshots/register.png" width="500"/> 
+<img src="screenshots/register.png" width="500"/>
 <img src="screenshots/login.png" width="500"/> 
 
 ### ✅ Завершение покупки и отправка ключей
