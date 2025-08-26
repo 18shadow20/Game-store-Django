@@ -63,7 +63,6 @@
 1. **Клонируйте репозиторий:**
 ```bash
 git clone https://github.com/18shadow20/Game-store-Django
-cd GameStore
 ```
 2. **Создайте виртуальное окружение и установите зависимости:**
 ```bash
